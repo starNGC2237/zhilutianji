@@ -1,24 +1,52 @@
 <template>
-    <section>
-      <div class="full-page">
-      </div>
-      <h1>Welcome to the homepage</h1>
+  <main class="index">
+    <section class="content">
+      <h1>💖 Hello. </h1>
+      <h2>I am zhilutianji , a Front-end developer.</h2>
+      <p>You can find me in Twitter: <a href="https://twitter.com/zhilutianji">@zhilutianji</a>
+        or Github: <a href="https://github.com/starNGC2237">@starNGC2237</a></p>
+        <p>and sometimes I also solve problems on  <a href="https://leetcode.cn/u/zhilutianji/">leetcode</a></p>
     </section>
+    <section class="head">
+      <img src="@/assets/images/head.png" alt="head pic"/>
+    </section>
+  </main>
 </template>
-<style scoped>
-.full-page {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100%;
-    background: #000;
+<style scoped lang="scss">
+.index {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
 }
-.projects {
-    /** grid布局，一行三个*/
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+.content{
+  width: 60%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 0 0 10vw;
+  font-size: 20px;
+  a{
+    color: skyblue;
+  }
+}
+.head{
+  width: 40%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  img{
+    width: 40%;
+    border-radius: 50%;
+  }
 }
 </style>
+<script setup lang="ts">
+</script>
