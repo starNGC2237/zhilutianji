@@ -21,7 +21,7 @@
   display: flex;
 }
 .content{
-  width: 60%;
+  width: 55%;
   height: 100%;
   background-color: #fff;
   display: flex;
@@ -35,18 +35,23 @@
   }
 }
 .head{
-  width: 40%;
+  width: 45%;
   height: 100%;
   background-color: #fff;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
   box-sizing: border-box;
+  padding-right: 10vw;
   img{
-    width: 40%;
+    width: 46%;
+    @media screen and (max-width: 1024px) {
+      width: 80%;
+    }
     border-radius: 50%;
   }
 }
+
 </style>
 <script setup lang="ts">
 </script>
