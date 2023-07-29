@@ -1,6 +1,5 @@
 <template>
     <slot />
-  <!--
     <div class="fixed shadow-sm bottom-0 left-0 right-0 md:bottom-5 md:left-1/2 md:right-auto md:-translate-x-1/2 h-22 border md:rounded-3xl rounded-none bg-white bg-opacity-70 backdrop-blur-xl">
       <ul class="flex justify-center items-center">
         <li class="h-20 w-20 m-2 rounded-2xl hover:bg-slate-200 transition-all " :class="$route.path === '/'?'bg-slate-200':''">
@@ -23,5 +22,4 @@
         </li>
       </ul>
     </div>
-  -->
 </template>
