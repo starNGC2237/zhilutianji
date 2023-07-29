@@ -5,7 +5,7 @@
       <h2 class="text-3xl my-6 font-bold">I am zhilutianji , a Front-end developer.</h2>
       <p class="text-xl my-5">You can find me in Twitter: <a target="_blank" class="text-[#87ceeb] no-underline hover:underline" href="https://twitter.com/zhilutianji">@zhilutianji</a>
         or Github: <a target="_blank" class="text-[#87ceeb] no-underline hover:underline" href="https://github.com/starNGC2237">@starNGC2237</a></p>
-      <p class="text-xl my-5">and sometimes I also solve problems on  <a target="_blank" class="text-[#87ceeb] no-underline hover:underline" href="https://leetcode.cn/u/zhilutianji/">leetcode</a></p>
+      <p class="text-xl my-5">and sometimes I also solve problems on  <a target="_blank" class="text-[#87ceeb] no-underline hover:underline" href="https://leetcode.cn/u/zhilutianji/">LeetCode</a></p>
     </section>
     <section class="w-[45%] h-full bg-[#fff] flex items-center justify-end box-border ">
       <img class="rounded-full xl:w-[45%] lg:w-[55%] md:w-[65%] sm:w-[80%]" src="@/assets/images/head.png" alt="head pic"/>
