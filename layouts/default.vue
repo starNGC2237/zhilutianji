@@ -37,5 +37,3 @@
   @apply h-20 w-20 m-2 rounded-2xl hover:bg-slate-200;
 }
 </style>
-<script setup lang="ts">
-</script>
