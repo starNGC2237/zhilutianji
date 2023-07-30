@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   plugins: [
       { src: '~/plugins/vercel.ts', mode: 'client' },
   ],
+  image: {
+    format: ['webp'],
+  },
   app: {
     head: {
       htmlAttrs:{ lang: 'en'},
