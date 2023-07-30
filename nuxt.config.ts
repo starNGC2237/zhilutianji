@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   plugins: [{ src: '~/plugins/vercel.ts', mode: 'client' }],
   app: {
     head: {
+      htmlAttrs:{ lang: 'en'},
       charset: 'utf-16',
       viewport: 'width=device-width, initial-scale=1',
       title: 'zhilutianji \'s site',
