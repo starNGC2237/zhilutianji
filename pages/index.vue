@@ -1,5 +1,5 @@
 <template>
-  <main class="absolute w-full h-full flex bg-[#fff] pb-[7.5em] px-[10%]">
+  <main class="absolute w-full h-full flex bg-[#fff] pb-[8em] px-[10%]">
     <section class="w-[55%] h-full bg-[#fff] flex flex-col justify-center box-border text-4xl">
       <h1 class="text-5xl my-7 font-bold">💖 Hello. </h1>
       <h2 class="text-3xl my-6 font-bold">I am zhilutianji , a Front-end developer.</h2>
