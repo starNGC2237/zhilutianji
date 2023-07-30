@@ -8,7 +8,7 @@
       <p class="text-xl my-5">and sometimes I also solve problems on  <a target="_blank" class="text-[#87ceeb] no-underline hover:underline" href="https://leetcode.cn/u/zhilutianji/">LeetCode</a></p>
     </section>
     <section class="w-[45%] h-full bg-[#fff] flex items-center justify-end box-border ">
-      <nuxt-img preload class="rounded-full xl:w-[45%] lg:w-[55%] md:w-[65%] sm:w-[80%] w-80% h-auto" src="/head.png" alt="head pic"/>
+      <nuxt-img preload class="rounded-full xl:w-[40%] lg:w-[55%] md:w-[65%] sm:w-[80%] w-[80%] h-auto" width="80%" height="auto" src="/head.png" alt="head pic"/>
     </section>
   </main>
 </template>
