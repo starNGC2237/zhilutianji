@@ -7,6 +7,8 @@ export default defineNuxtConfig({
     format: ['webp'],
   },
   app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' },
     head: {
       htmlAttrs:{ lang: 'en'},
       charset: 'utf-16',
@@ -21,7 +23,7 @@ export default defineNuxtConfig({
       ],
     }
   },
-  css: ['~/assets/css/main.scss'],
+  css: ['~/assets/css/main.scss','~/assets/css/scrollbar.scss'],
   modules: [
       '@nuxtjs/tailwindcss',
       '@nuxt/image'
