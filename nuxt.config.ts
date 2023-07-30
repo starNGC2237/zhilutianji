@@ -11,6 +11,7 @@ export default defineNuxtConfig({
         { name: 'description', content: 'zhilutianji \'s amazing site.' },
         { name: 'author', content: 'zhilutianji' },
         { name: 'keywords', content: 'zhilutianji, zhilutianji\'s site, zhilutianji\'s about, zhilutianji\'s homepage,zhilutianji\'s github ' },
+        { name: 'google', content: 'notranslate' },
       ],
     }
   },
