@@ -3,7 +3,7 @@
     <section class="flex justify-center w-full min-h-screen">
       <div class="container pb-[8em] pt-[3em]">
         <h1 class="px-4 text-4xl mb-7 w-[100%] sm:w-[90%] m-auto">Github:</h1>
-        <div v-if="error">
+        <div v-if="error" class="px-4 m-auto sm:w-[90%]">
           {{error}}
         </div>
         <div class="flex w-full flex-wrap justify-around px-4" v-if="data">
