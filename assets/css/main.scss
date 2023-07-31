@@ -1,6 +1,7 @@
-html{
-  overflow: auto;
-  scrollbar-gutter: stable;
+html,body{
+  scroll-behavior: smooth;
+  overflow: scroll;
+  scrollbar-gutter: stable both-edges;
 }
 /* 媒体查询 */
 @media screen and (min-width:320px) {
