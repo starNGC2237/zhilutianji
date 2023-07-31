@@ -12,7 +12,7 @@ const { data: blogList,error } = await useAsyncData(`content`, () => {
         <div v-if="error">
           {{error}}
         </div>
-        <div class="flex w-full flex-wrap justify-around px-4" v-else>
+        <div class="flex w-full flex-wrap justify-around px-4" v-if="blogList">
           <div class="p-6 bg-white w-[100%] sm:w-[100%] flex flex-col justify-left item rounded-lg border bg-opacity-70 backdrop-blur-sm hover:shadow-md" v-for="item in blogList" :key="item['id']">
             <h2 class="text-2xl mb-3"><a :href="item['_path']" class="font-bold">{{item['title']}}</a></h2>
             <p>{{item['description'] === '' ? '( no description )':item['description']}}</p>
