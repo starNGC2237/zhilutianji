@@ -25,6 +25,17 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/css/main.scss','~/assets/css/scrollbar.scss'],
   modules: ['@nuxtjs/tailwindcss', '@nuxt/image', '@nuxt/content'],
+  content: {
+    highlight: {
+      preload: [
+        'js',
+        'ts',
+        'vue',
+        'bash'
+        //....
+      ],
+    },
+  },
   vite: {
     css: {
       preprocessorOptions: {
