@@ -1,6 +1,6 @@
 <template>
     <div>
-      <h1>Welcome to the about page</h1>
+      <h1>Welcome to the blog page</h1>
     </div>
 </template>
 <style scoped>
