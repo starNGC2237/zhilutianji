@@ -9,9 +9,11 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxt/content": "^2.7.2",
     "@nuxt/devtools": "latest",
     "@nuxt/image": "1.0.0-rc.1",
     "@nuxtjs/tailwindcss": "^6.8.0",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^18.16.19",
     "eslint": "^8.45.0",
     "nuxt": "^3.6.3"

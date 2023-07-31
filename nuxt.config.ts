@@ -24,10 +24,7 @@ export default defineNuxtConfig({
     }
   },
   css: ['~/assets/css/main.scss','~/assets/css/scrollbar.scss'],
-  modules: [
-      '@nuxtjs/tailwindcss',
-      '@nuxt/image'
-  ],
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/image', '@nuxt/content'],
   vite: {
     css: {
       preprocessorOptions: {
@@ -36,6 +33,11 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+  tailwindcss:{
+    config: {
+      plugins: [require('@tailwindcss/typography')],
+    },
   },
   devtools: { enabled: true }
 })
