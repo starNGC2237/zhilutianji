@@ -44,6 +44,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # The GitHub token for authentication
         with:
+          title: Release ${{ github.ref }} # The title of the release
           args: build/* # The path to the built package files
           tag: ${{ github.ref }} # The tag name for the release
           name: Release ${{ github.ref }} # The name of the release
