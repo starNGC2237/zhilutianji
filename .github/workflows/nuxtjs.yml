@@ -25,8 +25,11 @@ jobs:
         run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm
 
       # Installs node18 using nvm
-      - name: Install node18
-        run: nvm install 18
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       # Builds the package using pnpm
       - name: Build package
