@@ -38,15 +38,13 @@ jobs:
       - name: Build package
         run: pnpm build
 
-      # Creates a release using ncipollo/release-action
-      - name: Github Release
+      # Creates a release using elgohr/Github-Release-Action@v4
+      - name: Create release
         uses: elgohr/Github-Release-Action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # The GitHub token for authentication
         with:
-          body: |
-            ${{ steps.release-notes.outputs.notes }}
-          tag_name: ${{ steps.release-notes.outputs.version }}
-          release_name: ${{ steps.release-notes.outputs.version }}
-          files: |
-            .output/*
-          draft: false
-          prerelease: false
+          args: build/* # The path to the built package files
+          tag: ${{ github.ref }} # The tag name for the release
+          name: Release ${{ github.ref }} # The name of the release
+          body: "This is a release for ${{ github.ref }}" # The description of the release
