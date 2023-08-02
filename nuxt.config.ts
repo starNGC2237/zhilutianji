@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' },
     head: {
-      htmlAttrs:{ lang: 'en'},
+      htmlAttrs:{ lang: 'en', class:'bg-white dark:bg-neutral-900'},
       charset: 'utf-16',
       viewport: 'width=device-width, initial-scale=1',
       title: 'zhilutianji \'s site',
