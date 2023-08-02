@@ -2,13 +2,13 @@
 export default defineNuxtConfig({
   plugins: [
       { src: '~/plugins/vercel.ts', mode: 'client' },
+      { src: '~/plugins/router.ts', mode: 'client' },
   ],
   image: {
     format: ['webp'],
   },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
-    layoutTransition: { name: 'layout', mode: 'out-in' },
     head: {
       htmlAttrs:{ lang: 'en' },
       charset: 'utf-16',
