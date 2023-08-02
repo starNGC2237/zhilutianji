@@ -24,3 +24,6 @@ html,body{
     font-size: 13px;
   }
 }
+html{
+  @apply bg-white dark:bg-neutral-900;
+}
