@@ -5,10 +5,10 @@ const { data: blogList,error } = await useAsyncData(`content`, () => {
 </script>
 
 <template>
-  <main class="absolute w-full min-h-full ">
+  <main class="absolute w-full min-h-full bg-white dark:bg-neutral-900">
     <section class="flex justify-center w-full min-h-screen">
       <div class="container pb-[8em] pt-[3em]">
-        <h1 class="px-4 text-4xl mb-7 w-[100%] sm:w-[90%]">Blog:</h1>
+        <h1 class="px-4 text-4xl mb-7 w-[100%] sm:w-[90%] dark:text-[#e8e6e3]">Blog:</h1>
         <div v-if="error">
           {{error}}
         </div>
