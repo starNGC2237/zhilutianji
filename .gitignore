@@ -30,4 +30,4 @@ out
 gen
 
 #obsidian files
-content/blog/.obsidian/
+content/blog/.obsidian/**
