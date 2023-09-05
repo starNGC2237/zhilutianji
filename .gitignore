@@ -28,3 +28,6 @@ logs
 *.iml
 out
 gen
+
+#obsidian files
+content/blog/.obsidian/
