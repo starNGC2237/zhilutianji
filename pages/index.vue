@@ -3,7 +3,7 @@
     <section class="w-[55%] h-full flex flex-col justify-center box-border text-4xl">
       <h1 class="text-5xl my-7 font-bold dark:text-[#e8e6e3]">💖 Hello. </h1>
       <h2 class="text-3xl my-6 font-bold dark:text-[#e8e6e3]">I am zhilutianji , a Front-end developer.</h2>
-      <p class="text-xl my-5 dark:text-[#e8e6e3]">You can find me in Twitter: <a target="_blank" class="text-[#0000CD] dark:text-blue-500 no-underline hover:underline" href="#">@zhilutianji</a>
+      <p class="text-xl my-5 dark:text-[#e8e6e3]">You can find me in Twitter: <a target="_blank" class="text-[#0000CD] dark:text-blue-500 no-underline hover:underline" href="#">( locked )</a>
         or Github: <a target="_blank" class="text-[#0000CD] dark:text-blue-500 no-underline hover:underline" href="https://github.com/starNGC2237">@starNGC2237</a></p>
       <p class="text-xl my-5 dark:text-[#e8e6e3]">and sometimes I also solve problems on  <a target="_blank" class="text-[#0000CD] dark:text-blue-500 no-underline hover:underline" href="https://leetcode.cn/u/zhilutianji/">LeetCode</a></p>
     </section>
