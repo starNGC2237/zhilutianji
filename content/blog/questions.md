@@ -95,8 +95,7 @@ IE盒模型的 width 和 height 属性的范围包含了 border 、 padding 和 
 - 标准盒模型的 width/height  不包含 padding 和 border
 - IE盒模型的 width/height  包含了 padding 和 border 
 
-![](https://github.com/starNGC2237/image_bed/blob/master/1.png?raw=true)
-
+![图片](https://github.com/starNGC2237/picx-images-hosting/raw/master/1.4u4mn91c89o0.webp)
 ## Vue3和Vue2的区别
 
 vue3 使用 ts 进行了重构
