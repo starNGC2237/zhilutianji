@@ -38,3 +38,11 @@ IOC 有一个容器用来放对象，初始化时扫描class上声明的依赖�
 
 声明依赖的方式，大家都选择了装饰器方式（java 叫注解）
 
+
+
+## Nestjs的生命周期
+
+![image](https://github.com/starNGC2237/picx-images-hosting/raw/master/image.l0bh1j3eglc.webp)
+
+
+todo...
