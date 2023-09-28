@@ -42,7 +42,64 @@ IOC 有一个容器用来放对象，初始化时扫描class上声明的依赖�
 
 ## Nestjs的生命周期
 
+
+```
+模块可以通过 @Global 声明为全局的，这样它 exports 的 provider 就可以在各处使用了，不需要 imports。
+
+provider、controller、module 都支持启动和销毁的生命周期函数，这些生命周期函数都支持 async 的方式。
+
+可以在其中做一些初始化、销毁的逻辑，比如 onApplicationShutwon 里通过 moduleRef.get 取出一些 provider，执行关闭连接等销毁逻辑。
+
+全局模块、生命周期、moduleRef 都是 Nest 很常用的功能。
+```
+
+
+
 ![image](https://github.com/starNGC2237/picx-images-hosting/raw/master/image.l0bh1j3eglc.webp)
 
 
-todo...
+Nest 在启动时，会递归解析 Moudules 依赖，扫描其中的 provider、controller，注入它的依赖
+
+全部解析完成后，会开始监听网络端口，开始处理请求
+
+这个过程中，Nest 暴露了一些生命周期方法：
+
+首先，递归初始化模块，会依次调用模块内的 controller、provider 的 onModuleInit 方法，然后再调用 module 的 onModuleInit 方法。
+
+全部初始化完之后，再依次调用模块内的 controller、provider 的 onApplicationBootstrap 方法，然后调用 module 的 onApplicationBootstrap 方法
+
+然后监听网络端口。
+
+之后 Nest 应用就正常运行了。
+
+***形如：***
+
+![{FB1DC03C-752B-4c0c-8AF6-84199118B04D}](https://github.com/starNGC2237/picx-images-hosting/raw/master/{FB1DC03C-752B-4c0c-8AF6-84199118B04D}.1t6ewfr1hn9c.png)
+
+
+销毁时候也是这样
+
+先调用每个模块的 controller、provider 的 onModuleDestroy 方法，然后调用 Module 的 onModuleDestroy 方法。
+
+之后再调用每个模块的 controller、provider 的 beforeApplicationShutdown 方法，然后调用 Module 的 beforeApplicationShutdown 方法。
+
+然后停止监听网络端口。
+
+之后调用每个模块的 controller、provider 的 onApplicationShutdown 方法，然后调用 Module 的 onApplicationShutdown 方法。
+
+之后停止进程。
+
+![5bb1ccd84fb14e638274df35198c3cff~tplv-k3u1fbpfcp-jj-mark_1512_0_0_0_q75](https://github.com/starNGC2237/picx-images-hosting/raw/master/5bb1ccd84fb14e638274df35198c3cff~tplv-k3u1fbpfcp-jj-mark_1512_0_0_0_q75.3jsncvuoyyo0.webp)
+
+***beforeApplicationShutdown*** 和别的不一样，可以（signal?: string）接受一个string
+
+***beforeApplicationShutdown*** 是可以拿到 signal 系统信号的，比如 SIGTERM。
+
+这些终止信号是别的进程传过来的，让它做一些销毁的事情，比如用 k8s 管理容器的时候，可以通过这个信号来通知它。
+
+***形如：***
+
+![{3B6F9F8B-8129-4ea6-AAE3-A193A31B9235}](https://github.com/starNGC2237/picx-images-hosting/raw/master/{3B6F9F8B-8129-4ea6-AAE3-A193A31B9235}.4p5mdgtcouc0.png)
+
+
+
