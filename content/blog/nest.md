@@ -103,3 +103,20 @@ Nest 在启动时，会递归解析 Moudules 依赖，扫描其中的 provider�
 
 
 
+## AOP面向切面（结合MVC）
+
+MVC 是 Model View Controller 的简写。MVC 架构下，请求会先发送给 Controller，由它调度 Model 层的 Service 来完成业务逻辑，然后返回对应的 View。
+
+![580375b654ac445cb2cd07784824104c~tplv-k3u1fbpfcp-jj-mark_1512_0_0_0_q75](https://github.com/starNGC2237/picx-images-hosting/raw/master/580375b654ac445cb2cd07784824104c~tplv-k3u1fbpfcp-jj-mark_1512_0_0_0_q75.5g6u8a0g4280.webp)
+
+如果想要加日志记录、权限控制、异常处理等通用逻辑
+
+例如可以在 control 层前后切一刀
+
+这样的横向扩展点就叫做切面，这种透明的加入一些切面逻辑的编程方式就叫做 AOP （面向切面编程）
+
+而 Nest 实现 AOP 的方式更多，一共有五种，包括 Middleware、Guard、Pipe、Interceptor、ExceptionFilter
+
+### Middleware（中间件）
+
+...
