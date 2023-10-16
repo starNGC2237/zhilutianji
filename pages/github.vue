@@ -22,7 +22,7 @@ const { data , error } = useAsyncData('list',()=>$fetch('https://api.github.com/
 </script>
 
 <style scoped lang="postcss">
-.item:not(:nth-last-of-type(-n+2)){
+.item{
   margin-bottom: 20px;
 }
 </style>
