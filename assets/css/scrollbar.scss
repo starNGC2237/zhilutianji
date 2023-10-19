@@ -1,6 +1,7 @@
 // common.less
 *::-webkit-scrollbar{
   width: 8px;
+  height: 8px;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -11,7 +12,5 @@
 // 兼容Firefox、IE
 * {
   scrollbar-width: auto;
-  scrollbar-base-color: green;
-  scrollbar-track-color: red;
-  scrollbar-arrow-color: blue;
+  scrollbar-color: auto;
 }
