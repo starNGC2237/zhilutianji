@@ -5,6 +5,7 @@
 学习自[IOC控制反转](https://juejin.cn/book/7226988578700525605/section/7226988493029146680)
 和[Nest.js入门 —— 控制反转与依赖注入（一）](https://juejin.cn/post/7085614364396355598)
 ***TODO***：通过[这个](https://juejin.cn/book/7226988578700525605/section/7227379507152781349)加深理解
+部分技巧来自于：[Nestjs 全家桶系列](https://www.bilibili.com/video/BV1NG41187Bs)
 
 
 后端系统中，有很多对象。例如我们要使用controller对象
@@ -119,4 +120,23 @@ MVC 是 Model View Controller 的简写。MVC 架构下，请求会先发送给 
 
 ### Middleware（中间件）
 
-...
+......
+
+
+
+## 开启版本号
+
+有时候接口形如/v1/user，怎么开启呢
+
+在 main.ts 处开启
+
+![a146e0e39d4068ae1346ea7702e0e560](https://github.com/starNGC2237/picx-images-hosting/raw/master/a146e0e39d4068ae1346ea7702e0e560.5u5eef17ot40.webp)
+
+在模块.controller.ts 处使用
+
+![10578033e14145aacb3e34a428d56de6](https://github.com/starNGC2237/picx-images-hosting/raw/master/10578033e14145aacb3e34a428d56de6.3gziy3qqwvu0.webp)
+
+
+
+或者，只给一个加
+![fda840fcae1227f4773fb63b1272b5bf](https://github.com/starNGC2237/picx-images-hosting/raw/master/fda840fcae1227f4773fb63b1272b5bf.6aj76f5bs800.webp)
