@@ -23,7 +23,25 @@ const data:projectItem[] = [
     html_url:'https://opal.starlibrary.online/',
     description:'opal - 每天60s看完全球资讯',
     openMethod:'_blank',
-  }
+  },
+  {
+    name:'教学能力比赛赛务平台',
+    html_url:'http://47.122.9.25:9998/demo1/',
+    description:'教学能力比赛赛务平台',
+    openMethod:'_blank',
+  },
+  {
+    name:'某商城',
+    html_url:'https://shops.starlibrary.online/',
+    description:'某商城',
+    openMethod:'_blank',
+  },
+  {
+    name:'博客运营平台',
+    html_url:'http://47.122.9.25:7777/',
+    description:'vue3',
+    openMethod:'_blank',
+  },
 ]
 const openUrl = (item:any)=>{
   if(item.openMethod === '_blank'){
