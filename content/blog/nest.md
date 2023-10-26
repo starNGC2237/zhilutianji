@@ -1,5 +1,7 @@
 # Nest中的知识点
 
+谢谢你！ChatGPT！你是我的老师！.jpg
+
 ## IOC（控制反转）
 
 学习自[IOC控制反转](https://juejin.cn/book/7226988578700525605/section/7226988493029146680)
@@ -122,6 +124,52 @@ MVC 是 Model View Controller 的简写。MVC 架构下，请求会先发送给 
 
 ......
 
+## Provider（提供者）
+
+左边是 Service，中间是IOC，右边是 Controller ，通过key-value映射
+
+![475d2331edf07a667aa8299c412e8362](https://github.com/starNGC2237/picx-images-hosting/raw/master/475d2331edf07a667aa8299c412e8362.7at4l85y88k0.png)
+
+如果这么写的话
+![f26ea6e5614afaa410861113dda9de6b](https://github.com/starNGC2237/picx-images-hosting/raw/master/f26ea6e5614afaa410861113dda9de6b.nhmircrkitc.webp)
+
+就需要注入的时候使用@Inject() 注解
+
+![98a11b5887188e71927c1ef9011238ba](https://github.com/starNGC2237/picx-images-hosting/raw/master/98a11b5887188e71927c1ef9011238ba.55ifpeh99ro0.webp)
+
+支持类似如下的形式
+app.module.ts
+
+```
+@Module({
+  imports: [],
+  controllers: [AppController], // 注入到providers中
+  providers: [
+    AppService2,
+    {
+      provide: 'ABC',
+      useClass: AppService,
+    },
+    {
+      provide: 'Test',
+      useValue: ['TB', 'PDD', 'JD'],
+    },
+    {
+      // 工厂模式
+      provide: 'Test2', // 可以通过inject注入其他服务
+      inject: [AppService2],
+      async useFactory(AppService2) {
+        console.log(AppService2.getHello());
+        return await new Promise((r) =>
+          setTimeout(() => r(AppService2.getHello()), 2000),
+        );
+      },
+    },
+  ],
+})
+export class AppModule {}
+```
+
 
 
 ## 开启版本号
@@ -140,3 +188,101 @@ MVC 是 Model View Controller 的简写。MVC 架构下，请求会先发送给 
 
 或者，只给一个加
 ![fda840fcae1227f4773fb63b1272b5bf](https://github.com/starNGC2237/picx-images-hosting/raw/master/fda840fcae1227f4773fb63b1272b5bf.6aj76f5bs800.webp)
+
+
+## 共享模块
+
+### 第一种：导出、导入
+
+需要在 user.module.ts 进行导出
+```ts
+@Module({
+  controllers: [UserController],
+  providers: [UserService],
+  exports: [UserService],
+})
+export class UserModule {}
+```
+
+在 app.module.ts 使用```imports:[UserModule]``` 导入
+
+并且在要使用的地方，app.controller.ts 使用
+
+```ts
+import { Controller, Get } from '@nestjs/common';
+import { AppService } from './app.service';
+import { UserService } from './user/user.service';
+  
+
+@Controller()
+export class AppController {
+  constructor(
+    private readonly appService: AppService,
+    private readonly userService: UserService,
+  ) {}
+  
+  @Get()
+  getHello(): string {
+    return this.userService.findAll();
+  }
+}
+```
+
+### 全局（优势在于不用在 module 里导入）
+
+例如说我们有一个 config/config.module.ts 模块，我们需要在头上加上 @Global() 注释，并导出它
+
+```ts
+import { Global, Module } from '@nestjs/common';
+
+@Global()
+@Module({
+  providers: [
+    {
+      provide: 'CONFIG_OPTIONS',
+      useValue: {
+        baseUrl: {
+          baseUrl: '/api',
+        },
+      },
+    },
+  ],
+
+  // 这里也要导出
+  exports: [
+    {
+      provide: 'CONFIG_OPTIONS',
+      useValue: {
+        baseUrl: {
+          baseUrl: '/api',
+        },
+      },
+    },
+  ],
+})
+
+export class ConfigModule {}
+```
+
+同时，在list.controller.ts 使用
+
+```ts
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { UserModule } from './user/user.module';
+import { ListModule } from './list/list.module';
+
+  
+
+@Module({
+  imports: [UserModule, ListModule],
+  controllers: [AppController],
+  providers: [AppService],
+})
+
+export class AppModule {}
+```
+
+
+这样，所有的模块都可以使用 ConfigModule 了
