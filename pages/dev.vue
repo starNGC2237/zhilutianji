@@ -58,13 +58,13 @@ const openUrl = (item:any)=>{
     <section class="flex justify-center w-full min-h-screen">
       <div class="container pb-[8em] pt-[3em]">
         <h1 class="px-4 text-4xl mb-7 w-[100%] sm:w-[90%] m-auto dark:text-[#e8e6e3]">项目预览:</h1>
-        <div class="flex w-full flex-wrap justify-between px-4 w-full sm:w-[90%] m-auto">
-          <div class="p-6 bg-white w-[100%] sm:w-[40%] flex flex-col justify-left item rounded-lg border bg-opacity-70 backdrop-blur-sm hover:shadow-md" v-for="item in data" :key="item['id']">
+        <div class="flex w-full flex-wrap justify-between px-4 sm:w-[90%] m-auto">
+          <UCard v-for="item in data" :key="item['id']" class="w-[100%] sm:w-[40%] flex flex-col justify-left item border">
             <h2 class="text-2xl mb-3">
               <a :href="item['html_url']" @click.prevent="openUrl(item)" class="font-bold">{{item['name']}}</a>
             </h2>
             <p>{{item['description'] === null ? '( no description )':item['description']}}</p>
-          </div>
+          </UCard>
         </div>
       </div>
     </section>
@@ -73,6 +73,7 @@ const openUrl = (item:any)=>{
 
 <style scoped lang="postcss">
 .item{
+  box-sizing: border-box;
   margin-bottom: 20px;
 }
 </style>

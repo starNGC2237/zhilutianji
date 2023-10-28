@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     }
   },
   css: ['~/assets/css/main.scss','~/assets/css/scrollbar.scss'],
-  modules: ['@nuxtjs/tailwindcss', '@nuxt/image', '@nuxt/content'],
+  modules: [ '@nuxt/image', '@nuxt/content','@nuxt/ui'],
   content: {
     highlight: {
       preload: [
