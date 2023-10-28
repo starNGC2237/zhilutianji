@@ -264,7 +264,69 @@ import { Global, Module } from '@nestjs/common';
 export class ConfigModule {}
 ```
 
+这样，所有的模块都可以使用 ConfigModule 了
+
 同时，在list.controller.ts 使用
+
+```ts
+import {
+  Controller,
+  Get,
+  Inject,
+} from '@nestjs/common';
+import { ListService } from './list.service';
+
+  
+
+@Controller('list')
+export class ListController {
+  constructor(
+    private readonly listService: ListService,
+    @Inject('Config') private readonly base: any,
+  ) {}
+
+  @Get()
+  findAll() {
+    return this.base;
+  }
+}
+```
+
+## 动态模块
+
+如何使用动态模块
+
+```ts
+import { DynamicModule, Global, Module } from '@nestjs/common';
+import { ConfigService } from './config.service';
+import { ConfigController } from './config.controller';
+
+interface Options {
+  path: string;
+}
+
+@Global()
+@Module({})
+export class ConfigModule {
+  static forRoot(options: Options): DynamicModule {
+    return {
+      module: ConfigModule,
+      controllers: [ConfigController],
+      providers: [
+        ConfigService,
+        { provide: 'Config', useValue: 'Config' + options.path },
+      ],
+      exports: [
+        ConfigService,
+        { provide: 'Config', useValue: 'Config' + options.path },
+      ],
+    };
+  }
+}
+```
+
+然后就可以在要用的地方使用了，比如说 app.module.ts，
+warning：哪怕是 @Globel 声明了，也要在app.module引入才能用
 
 ```ts
 import { Module } from '@nestjs/common';
@@ -272,11 +334,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { ListModule } from './list/list.module';
+import { ConfigModule } from './config/config.module';
 
   
 
 @Module({
-  imports: [UserModule, ListModule],
+  imports: [
+    UserModule,
+    ListModule,
+    ConfigModule.forRoot({ path: '/starMars' }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -285,4 +352,110 @@ export class AppModule {}
 ```
 
 
-这样，所有的模块都可以使用 ConfigModule 了
+## 中间件
+
+### 依赖中间件
+
+执行 ```nest g middleware logger --no-spec --flat``` 创建一个中间件
+
+如下所示（记得标注类型）：
+
+```ts
+import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Request, Response, NextFunction } from 'express';
+
+@Injectable()
+export class LoggerMiddleware implements NestMiddleware {
+  use(req: any, res: any, next: () => void) {
+    console.log('brefore'); 
+    next(); 
+    console.log('after');
+  }
+}
+```
+
+然后在module里这么使用：
+
+```ts
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { UserService } from './user.service';
+import { UserController } from './user.controller';
+import { Logger } from 'src/middleware';
+
+  
+
+@Module({
+  controllers: [UserController],
+  providers: [UserService],
+})
+
+export class UserModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    // 这样是控制所有 UserController 的接口
+    consumer.apply(Logger).forRoutes(UserController);
+    // 这样是只控制 UserController 里的为user的POST接口
+    //.forRoutes({ path: 'user', method: RequestMethod.POST });
+  }
+}
+```
+
+
+### 全局中间件
+
+其实照我看来，就是中间件的另一种写法（函数式），不是全局中间件也可以这么写
+
+main.ts
+
+```ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+  
+
+const whiteList = ['/list'];
+  
+
+const middlewareAll = (req, res, next) => {
+  console.log(req.originalUrl);
+  if (whiteList.includes(req.originalUrl)) {
+    next();
+  } else {
+    res.send({ code: 0, msg: '没有权限' });
+  }
+};
+
+  
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.use(middlewareAll);
+  await app.listen(3000);
+}
+
+bootstrap();
+```
+
+
+## 跨域相关
+
+1. 安装cors和cors的类型文件
+
+```bash
+npm i @types/cors
+npm i @types/cors -D 
+```
+
+2. 使用
+
+```ts
+import { NestFactory } from '@nestjs/core';
+import * as cors from 'cors';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.use(cors());
+  await app.listen(3000);
+}
+
+bootstrap();
+```
