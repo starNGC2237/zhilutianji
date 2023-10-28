@@ -6,11 +6,11 @@
         <div v-if="error" class="px-4 m-auto sm:w-[90%]">
           {{error}}
         </div>
-        <div class="flex w-full flex-wrap justify-between px-4 w-full sm:w-[90%] m-auto" v-if="data?.length>0">
-          <div class="p-6 bg-white w-[100%] sm:w-[40%] flex flex-col justify-left item rounded-lg border bg-opacity-70 backdrop-blur-sm hover:shadow-md" v-for="item in data" :key="item['id']">
+        <div class="flex flex-wrap justify-between px-4 w-full sm:w-[90%] m-auto" v-if="data?.length>0">
+          <UCard v-for="item in data" :key="item['id']" class="w-[100%] sm:w-[40%] flex flex-col justify-left item border">
             <h2 class="text-2xl mb-3"><a :href="item['html_url']" target="_blank" class="font-bold">{{item['name']}}</a></h2>
             <p>{{item['description'] === null ? '( no description )':item['description']}}</p>
-          </div>
+          </UCard>
         </div>
       </div>
     </section>

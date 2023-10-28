@@ -13,10 +13,10 @@ const { data: blogList,error } = await useAsyncData(`content`, () => {
           {{error}}
         </div>
         <div class="flex w-full flex-wrap justify-around px-4 sm:w-[90%] m-auto" v-if="blogList">
-          <div class="p-6 bg-white w-[100%] sm:w-[100%] flex flex-col justify-left item rounded-lg border bg-opacity-70 backdrop-blur-sm hover:shadow-md" v-for="item in blogList" :key="item['id']">
+          <UCard v-for="item in blogList" :key="item['id']" class="w-[100%] sm:w-[100%] flex flex-col justify-left item border">
             <h2 class="text-2xl mb-3"><a :href="item['_path']" class="font-bold">{{item['title']}}</a></h2>
             <p>{{item['description'] === '' ? '( no description )':item['description']}}</p>
-          </div>
+          </UCard>
         </div>
       </div>
     </section>
