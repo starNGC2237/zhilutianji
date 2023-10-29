@@ -13,10 +13,11 @@
           @click="scrollTop"
         />
       </div>
+      <USlideover v-model="isOpen" :ui="{width:'max-w-[40%]'}">
+        <!-- Content -->
+      </USlideover>
     </main>
-  <USlideover v-model="isOpen" :ui="{width:'max-w-[40%]'}">
-    <!-- Content -->
-  </USlideover>
+
 </template>
 <script setup lang="ts">
 
