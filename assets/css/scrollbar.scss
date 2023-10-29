@@ -2,10 +2,13 @@
 *::-webkit-scrollbar{
   width: 8px;
   height: 8px;
+  background-color: #F5F5F5;
 }
-
+*::-webkit-scrollbar-track{
+  background-color: #F5F5F5;
+}
 *::-webkit-scrollbar-thumb {
-  background: transparent; // 滑块颜色
+  background: grey; // 滑块颜色
   border-radius: 4px; // 滑块圆角
 }
 
