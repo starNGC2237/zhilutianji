@@ -3,7 +3,7 @@
       <section class="container h-fit sm:px-[4em] box-border pt-[4em] ">
         <ContentDoc class="prose max-w-none dark:prose-invert text-lg"/>
       </section>
-      <div :class="show?'flex':'hidden'" class="scrollToTop fixed bottom-5 right-[8%] h-20  justify-center items-center">
+      <div :class="show?'flex':'hidden'" class="scrollToTop fixed md:bottom-5 md:right-[8%] bottom-[6rem] right-[5px] h-20  justify-center items-center ">
         <UButton
           icon="i-heroicons-bars-arrow-up"
           size="xl"
