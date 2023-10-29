@@ -32,7 +32,6 @@ export default defineNuxtConfig({
         'ts',
         'vue',
         'bash'
-        //....
       ],
     },
   },
