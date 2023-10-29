@@ -1,18 +1,18 @@
-# Nest中的知识点
+# Nest 中的知识点
 
 谢谢你！ChatGPT！你是我的老师！.jpg
 
 ## IOC（控制反转）
 
-学习自[IOC控制反转](https://juejin.cn/book/7226988578700525605/section/7226988493029146680)
-和[Nest.js入门 —— 控制反转与依赖注入（一）](https://juejin.cn/post/7085614364396355598)
+学习自[ IOC 控制反转](https://juejin.cn/book/7226988578700525605/section/7226988493029146680)
+和 [Nest.js 入门 —— 控制反转与依赖注入（一）](https://juejin.cn/post/7085614364396355598)
 ***TODO***：通过[这个](https://juejin.cn/book/7226988578700525605/section/7227379507152781349)加深理解
 部分技巧来自于：[Nestjs 全家桶系列](https://www.bilibili.com/video/BV1NG41187Bs)
 
 
-后端系统中，有很多对象。例如我们要使用controller对象
+后端系统中，有很多对象。例如我们要使用 controller 对象
 
-而Controller 依赖了 Service 实现业务逻辑，Service 依赖了 Repository 来做增删改查，Repository 依赖 DataSource 来建立连接，DataSource 又需要从 Config 对象拿到用户名密码等信息
+而 Controller 依赖了 Service 实现业务逻辑，Service 依赖了 Repository 来做增删改查，Repository 依赖 DataSource 来建立连接，DataSource 又需要从 Config 对象拿到用户名密码等信息
 
 我们需要这么写：
 ```ts
@@ -29,15 +29,15 @@ const controller = new Controller(service);
 
 在应用初始化的时候，需要理清依赖的先后关系，创建一大堆对象组合起来，还要保证不要多次 new，是不是很麻烦
 
-所以我们可以使用IOC来解决这个问题
+所以我们可以使用 IOC 来解决这个问题
 
 我在 class 上直接声明它依赖啥不就行了嘛，然后工具会去分析我声明的依赖关系，根据先后顺序自动把对象创建好了，然后组装起来
 
-IOC 有一个容器用来放对象，初始化时扫描class上声明的依赖关系，并new 一个放入容器里，创建对象时自动注入依赖的对象
+IOC 有一个容器用来放对象，初始化时扫描 class 上声明的依赖关系，并 new 一个放入容器里，创建对象时自动注入依赖的对象
 
 这种方式叫 DI（依赖注入）
 
-本来是手动new 依赖对象，现在是声明依赖，等待被注入，即控制反转
+本来是手动 new 依赖对象，现在是声明依赖，等待被注入，即控制反转
 
 声明依赖的方式，大家都选择了装饰器方式（java 叫注解）
 
@@ -106,7 +106,7 @@ Nest 在启动时，会递归解析 Moudules 依赖，扫描其中的 provider�
 
 
 
-## AOP面向切面（结合MVC）
+## AOP 面向切面（结合 MVC）
 
 MVC 是 Model View Controller 的简写。MVC 架构下，请求会先发送给 Controller，由它调度 Model 层的 Service 来完成业务逻辑，然后返回对应的 View。
 
@@ -204,7 +204,7 @@ export class AppModule {}
 export class UserModule {}
 ```
 
-在 app.module.ts 使用```imports:[UserModule]``` 导入
+在 app.module.ts 使用 ```imports:[UserModule]``` 导入
 
 并且在要使用的地方，app.controller.ts 使用
 
@@ -266,7 +266,7 @@ export class ConfigModule {}
 
 这样，所有的模块都可以使用 ConfigModule 了
 
-同时，在list.controller.ts 使用
+同时，在 list.controller.ts 使用
 
 ```ts
 import {
@@ -326,7 +326,7 @@ export class ConfigModule {
 ```
 
 然后就可以在要用的地方使用了，比如说 app.module.ts，
-warning：哪怕是 @Globel 声明了，也要在app.module引入才能用
+warning：哪怕是 @Globel 声明了，也要在 app.module 引入才能用
 
 ```ts
 import { Module } from '@nestjs/common';
@@ -374,7 +374,7 @@ export class LoggerMiddleware implements NestMiddleware {
 }
 ```
 
-然后在module里这么使用：
+然后在 module 里这么使用：
 
 ```ts
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
@@ -437,7 +437,7 @@ bootstrap();
 
 ## 跨域相关
 
-1. 安装cors和cors的类型文件
+1. 安装 cors 和 cors 的类型文件
 
 ```bash
 npm i @types/cors

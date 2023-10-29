@@ -1,4 +1,4 @@
-# Vue2与Vue3的区别
+# Vue2 与 Vue3 的区别
 
 https://gitee.com/jch1011/vue3_communication.git
 ## 通信方式
@@ -16,13 +16,13 @@ https://gitee.com/jch1011/vue3_communication.git
 
 ### vue3
 
-1. props 使用defineProps
+1. props 使用 defineProps
 2. 自定义事件
-	1. 原生dom事件
-	2.  vue2中 @click是自定义事件，原生要加.navite
-	3.  vue3中@click为原生DOM事件
-	4. vue3：原生的DOM事件不管是放在标签身上还是组件标签身上，都是原生DOM事件
-	5. @click其实是给子组件的根节点绑定
+	1. 原生 dom 事件
+	2.  vue2 中 @click 是自定义事件，原生要加 .navite
+	3.  vue3 中 @click 为原生 DOM 事件
+	4. vue3：原生的 DOM 事件不管是放在标签身上还是组件标签身上，都是原生 DOM 事件
+	5. @click 其实是给子组件的根节点绑定
 	6. 子组件给父组件传递 @xxx='()=>{}'
 	7. 声明：
        ```js
@@ -33,7 +33,7 @@ https://gitee.com/jch1011/vue3_communication.git
         $emit('xxx','东风');
        ```
 	9. 第一个参数：事件类型，接下来的参数为注入数据
-	10. 如果在defineEmits声明'click'，@click就会变成自定义事件
+	10. 如果在 defineEmits 声明 'click'，@click 就会变成自定义事件
 	11. 这个 ***emits*** 选项还支持对象语法，它允许我们对触发事件的参数进行验证：
 	    ```vue
 	    <script setup>
@@ -45,7 +45,7 @@ https://gitee.com/jch1011/vue3_communication.git
 	    })
 	    </script>
 	    ```
-	12. 如果你正在搭配 TypeScript 使用script setup，也可以使用纯类型标注来声明触发的事件：
+	12. 如果你正在搭配 TypeScript 使用 script setup，也可以使用纯类型标注来声明触发的事件：
 	    ```vue
 	    <script setup lang="ts">
 	    const emit = defineEmits<{
@@ -54,8 +54,8 @@ https://gitee.com/jch1011/vue3_communication.git
 	    }>()
 	    </script>
 	    ```
-3. 全局事件总线（vue3使用mitt 代替$bus，因为没有this了）
-	1. 安装mitt 
+3. 全局事件总线（vue3使用 mitt 代替 $bus，因为没有 this 了）
+	1. 安装 mitt 
        ```bash
         npm i -D mitt 
        ```
@@ -90,7 +90,7 @@ https://gitee.com/jch1011/vue3_communication.git
 	    let $emit = defineEmits(["update:money"]);
 	    <Button>@click="$emit('update:pageSize', pageSize + 4)"<Button/>
 	    ```
-5. attrs vue3提供了一个方法，获取组件身上的属性和事件
+5. attrs vue3 提供了一个方法，获取组件身上的属性和事件
 	1. 使用
 	    ```vue
         //vue3将$attrs和$linterners合并了
@@ -98,12 +98,12 @@ https://gitee.com/jch1011/vue3_communication.git
     	<el-button :='$attrs'>按钮</el-button>
 	    ```
 	2. ***注意！如果使用props接收了，useAttrs方法就获取不到了*** 
-6. 使用ref和$parent
+6. 使用 ref 和 $parent
 	1. 子组件内部的数据默认关闭的，需要使用```defineExpose({money})```暴露
 	2. ```son.value.money-=10;```
 	3. ```子组件中使用$parent```
-7. 父孙之间通信：Provide与Inject
-	1.  vue3提供provide（提供）和inject（注入），可以实现隔辈传递数据
+7. 父孙之间通信：Provide 与 Inject
+	1.  vue3 提供 provide（提供）和 inject（注入），可以实现隔辈传递数据
 	2. 例如
 	    ```
 	    	let car = ref('车')；
@@ -147,16 +147,16 @@ https://gitee.com/jch1011/vue3_communication.git
 	6. 使用
 	    ``` js
 	    import useInfoStore from "../../store/modules/info";
-	    //获取小仓库对象
+	    // 获取小仓库对象
 	    let infoStore = useInfoStore();
 	    console.log(infoStore);
-	    //修改数据方法
+	    // 修改数据方法
 	    const updateCount = () => {
-	        //仓库调用自身的方法去修改仓库的数据
+	        // 仓库调用自身的方法去修改仓库的数据
 	        infoStore.updateNum(66, 77);
 	    };
 	    ```
-	7. 组合式api
+	7. 组合式 api
 	    ```js
 	    //定义组合式API仓库
 	    import { defineStore } from "pinia";
@@ -174,7 +174,7 @@ https://gitee.com/jch1011/vue3_communication.git
 	    	        return prev + next;
 	    	    }, 0);
 	    	});
-	    //务必要返回一个对象:属性与方法可以提供给组件使用
+	    // 务必要返回一个对象:属性与方法可以提供给组件使用
 	    	return {
 	    		todos,
 	    		arr,
