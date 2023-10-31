@@ -7,7 +7,7 @@
           {{error}}
         </div>
         <div class="flex flex-wrap justify-between px-4 w-full sm:w-[90%] m-auto" v-if="data?.length===0">
-            <UCard v-for="item in 30" :key="item['id']" class="w-[100%] sm:w-[40%] flex flex-col justify-left item border">
+            <UCard v-for="item in 10" :key="item['id']" class="w-[100%] sm:w-[40%] flex flex-col justify-left item border">
               <USkeleton class="text-2xl mb-3 h-7 w-[40%]"></USkeleton>
               <div class="space-y-3">
                 <USkeleton class="h-6"/>
