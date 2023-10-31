@@ -8,6 +8,9 @@ dependencies:
   '@nuxt/ui':
     specifier: ^2.9.0
     version: 2.9.0(vue@3.3.7)(webpack@5.89.0)
+  '@nuxtjs/web-vitals':
+    specifier: ^0.2.6
+    version: 0.2.6
   '@vercel/analytics':
     specifier: ^1.1.1
     version: 1.1.1
@@ -1582,6 +1585,19 @@ packages:
       - supports-color
       - ts-node
       - webpack
+
+  /@nuxtjs/web-vitals@0.2.6:
+    resolution: {integrity: sha512-hoLo/Lcl63rDEm1gR/VN3sSG7mO4UKzJF69lyKjm+cSWtnSinSQo4n/8V0qmDqVgC3GPfvC1X/IqZx5FaRSS/g==}
+    dependencies:
+      '@nuxt/kit': 3.8.0
+      defu: 6.1.3
+      pathe: 1.1.1
+      ufo: 1.3.1
+      web-vitals: 3.5.0
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: false
 
   /@parcel/watcher-android-arm64@2.3.0:
     resolution: {integrity: sha512-f4o9eA3dgk0XRT3XhB0UWpWpLnKgrh1IwNJKJ7UJek7eTYccQ8LR7XUWFKqw6aEq5KUNlCcGvSzKqSX/vtWVVA==}
@@ -9200,6 +9216,10 @@ packages:
   /web-namespaces@2.0.1:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
     dev: true
+
+  /web-vitals@3.5.0:
+    resolution: {integrity: sha512-f5YnCHVG9Y6uLCePD4tY8bO/Ge15NPEQWtvm3tPzDKygloiqtb4SVqRHBcrIAqo2ztqX5XueqDn97zHF0LdT6w==}
+    dev: false
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}

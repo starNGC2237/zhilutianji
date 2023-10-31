@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@nuxt/ui": "^2.9.0",
+    "@nuxtjs/web-vitals": "^0.2.6",
     "@vercel/analytics": "^1.1.1",
     "normalize.css": "^8.0.1",
     "sass": "^1.64.1"
