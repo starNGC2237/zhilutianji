@@ -20,8 +20,6 @@ export default defineNuxtConfig({
         { name: 'author', content: 'zhilutianji' },
         { name: 'keywords', content: 'zhilutianji, zhilutianji\'s site, zhilutianji\'s about, zhilutianji\'s homepage,zhilutianji\'s github ' },
         { name: 'google', content: 'notranslate' },
-        { name: 'http-equiv', content: 'Content-Security-Policy' },
-        {name:'content-security-policy',content:'default-src \'self\' vitals.vercel-insights.com'}
       ],
     }
   },
