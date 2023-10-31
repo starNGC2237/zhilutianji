@@ -37,7 +37,7 @@ const data:projectItem[] = [
     openMethod:'_blank',
   },
   {
-    name:'博客运营平台',
+    name:'运营平台',
     html_url:'http://47.122.9.25:7777/',
     description:'vue3',
     openMethod:'_blank',
