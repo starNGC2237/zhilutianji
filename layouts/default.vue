@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-[#fff] dark:bg-neutral-900">
     <slot />
     <div class="tabs">
       <ul class="tabs-ul">
