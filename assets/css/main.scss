@@ -1,4 +1,6 @@
-html,body{
+:root{
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable both-edges;
   overflow-y: scroll;
 }
 /* 媒体查询 */
