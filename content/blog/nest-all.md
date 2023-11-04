@@ -459,3 +459,110 @@ async function bootstrap() {
 
 bootstrap();
 ```
+
+## 上传文件与下载文件
+
+### 上传文件
+
+使用 multer 实现上传文件
+
+```bash
+npm i multer -S
+npm i @types/multer -D
+```
+
+然后新建一个模块，在其中的 upload.module.ts 中引入multer
+
+```ts
+import { Module } from '@nestjs/common';
+import { UploadService } from './upload.service';
+import { UploadController } from './upload.controller';
+import { MulterModule } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname, join } from 'path';
+
+  
+
+@Module({
+
+  imports: [
+    MulterModule.register({
+      storage: diskStorage({
+        // 设置上传后的目录
+        destination: join(__dirname, '../images'),
+        filename: (_, file, cb) => {
+	      // 重新命名文件
+	      // extname 取后缀
+          const fileName = `${
+            new Date().getTime() + extname(file.originalname)
+          }`;
+          return cb(null, fileName);
+        },
+      }),
+    }),
+  ],
+  controllers: [UploadController],
+  providers: [UploadService],
+})
+
+export class UploadModule {}
+```
+
+然后开始写接口，在 upload.control.ts 中
+说实话，写在 upload.service.ts 里比较好，他偷懒了，我也偷懒了
+
+```ts
+import {
+  Controller,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
+import { UploadService } from './upload.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+
+  
+
+@Controller('upload')
+
+export class UploadController {
+  constructor(private readonly uploadService: UploadService) {}
+  
+  @Post('album')
+  @UseInterceptors(FileInterceptor('file'))
+  upload(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
+    return 'Get it!';
+  }
+}
+```
+
+
+### 附赠一个开启静态文件访问的代码
+
+在 main.ts 中
+```ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
+
+  
+
+async function bootstrap() {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  // 开启静态访问
+  app.useStaticAssets(join(__dirname, 'images'), {
+    prefix: '/images',
+  });
+
+  await app.listen(3000);
+
+}
+
+bootstrap();
+```
+
+### 下载文件
+
