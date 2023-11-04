@@ -1,7 +1,14 @@
+@tailwind base;
 :root{
   scroll-behavior: smooth;
   scrollbar-gutter: stable both-edges;
   overflow-y: scroll;
+  background-color: white;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: rgb(23 23 23);
+  }
 }
 /* 媒体查询 */
 @media screen and (min-width:320px) {
@@ -23,7 +30,4 @@
   html{
     font-size: 13px;
   }
-}
-html{
-  @apply bg-white dark:bg-neutral-900;
 }
