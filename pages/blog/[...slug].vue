@@ -3,9 +3,18 @@
       <section class="container h-fit sm:px-[4em] box-border pt-[4em] ">
         <ContentDoc class="prose max-w-none dark:prose-invert text-lg"/>
       </section>
-      <div :class="show?'flex':'hidden'" class="scrollToTop fixed md:bottom-5 md:right-[8%] bottom-[6rem] right-[5px] h-20 justify-center items-center">
+      <div class="scrollToTop fixed md:bottom-5 md:right-[8%] bottom-[7rem] right-[5px] h-20 justify-center items-center flex flex-col gap-1">
+        <UButton
+            icon="i-heroicons-square-3-stack-3d"
+            size="xl"
+            color="primary"
+            rounded-full
+            variant="solid"
+            @click="openModal"
+        />
         <UButton
           icon="i-heroicons-bars-arrow-up"
+          :class="show?'flex':'hidden'"
           size="xl"
           color="primary"
           rounded-full
@@ -13,25 +22,55 @@
           @click="scrollTop"
         />
       </div>
-      <USlideover v-model="isOpen" :ui="{ width: 'max-w-[40%]' }">
-        <div class="p-4">
-          <ul>
-            <li v-for="item in links">{{item.text}}</li>
-          </ul>
-        </div>
-      </USlideover>
-      <div class="w-16 h-16 fixed top-[50vh] right-6 flex items-center justify-center" @click="openSlideOver">
-        <UIcon name="i-heroicons-arrow-left" class="w-12 h-12"/>
-      </div>
+      <UModal v-model="isOpen">
+        <UModal v-model="isOpen">
+          <UCommandPalette
+              :autoselect="false"
+              nullable
+              :groups="groupLinks"
+              @update:model-value="onSelect"
+          />
+        </UModal>
+      </UModal>
     </main>
 
 </template>
 <script setup lang="ts">
+const router = useRouter()
+const route = useRoute()
 const { data: page } = await useAsyncData('my-page', queryContent(useRoute().fullPath).findOne);
-console.log(page.value?.body.toc?.links || [])
-let links = toRaw(page.value?.body.toc?.links || [])
+let links = toRaw(page.value?.body.toc?.links || []);
 console.log(links)
-
+let haveChildrenLinks = (link)=>{
+  return {
+      key: link.id,
+      label: link.text,
+      commands: [
+        {
+          id: link.id,
+          label: link.text
+        }
+      ].concat(link.children?.map((child: any) => ({
+        id: child.id,
+        label: child.text,
+      })))
+    }
+}
+let groupLinks = []
+links.forEach(item=>{
+  if(item.children){
+    groupLinks.push(haveChildrenLinks(item))
+  }else {
+    groupLinks.push({
+      key: item.id,
+      commands: [{
+        id: item.id,
+        label: item.text
+      }]
+    })
+  }
+})
+console.log(groupLinks)
 
 let show = ref(false)
 let fullHeight = ref(0);
@@ -48,10 +87,13 @@ const throttled = (fn: any, wait:number)=>{
     }
   }
 }
-const openSlideOver = ()=>{
+const openModal = ()=>{
   isOpen.value = true;
 }
-
+const onSelect = (option:any)=>{
+  isOpen.value = false;
+  router.push(route.path+ '#' + option.id)
+}
 onMounted(()=>{
   fullHeight.value = window.screen.height;
   window.addEventListener('scroll', throttled(()=> {
