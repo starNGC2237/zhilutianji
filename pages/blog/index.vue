@@ -21,6 +21,7 @@ const { data: blogList,error } = await useAsyncData(`content`, () => {
       </div>
     </section>
   </main>
+
 </template>
 
 <style scoped lang="postcss">
