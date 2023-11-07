@@ -56,7 +56,7 @@ let haveChildrenLinks = (link)=>{
       })))
     }
 }
-let groupLinks = []
+let groupLinks:any[] = []
 links.forEach(item=>{
   if(item.children){
     groupLinks.push(haveChildrenLinks(item))
