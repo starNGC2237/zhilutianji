@@ -26,7 +26,6 @@
         <UModal v-model="isOpen">
           <UCommandPalette
               :autoselect="false"
-              nullable
               :groups="groupLinks"
               @update:model-value="onSelect"
           />
@@ -41,7 +40,7 @@ const route = useRoute()
 const { data: page } = await useAsyncData('my-page', queryContent(useRoute().fullPath).findOne);
 let links = toRaw(page.value?.body.toc?.links || []);
 console.log(links)
-let haveChildrenLinks = (link)=>{
+let haveChildrenLinks = (link:any)=>{
   return {
       key: link.id,
       label: link.text,
@@ -89,6 +88,10 @@ const throttled = (fn: any, wait:number)=>{
 }
 const openModal = ()=>{
   isOpen.value = true;
+  nextTick(()=>{
+    const input = document.querySelector('#headlessui-combobox-input-11') as HTMLInputElement;
+    input.blur()
+  })
 }
 const onSelect = (option:any)=>{
   isOpen.value = false;
