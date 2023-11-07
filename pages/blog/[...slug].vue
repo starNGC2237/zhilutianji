@@ -27,6 +27,11 @@
           <UCommandPalette
               :autoselect="false"
               :groups="groupLinks"
+              :ui="{
+                input: {
+                  base:'w-full placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0 focus:outline-none input-search-article',
+                }
+              }"
               @update:model-value="onSelect"
           />
         </UModal>
@@ -39,7 +44,7 @@ const router = useRouter()
 const route = useRoute()
 const { data: page } = await useAsyncData('my-page', queryContent(useRoute().fullPath).findOne);
 let links = toRaw(page.value?.body.toc?.links || []);
-console.log(links)
+
 let haveChildrenLinks = (link:any)=>{
   return {
       key: link.id,
@@ -69,7 +74,6 @@ links.forEach(item=>{
     })
   }
 })
-console.log(groupLinks)
 
 let show = ref(false)
 let fullHeight = ref(0);
@@ -89,7 +93,7 @@ const throttled = (fn: any, wait:number)=>{
 const openModal = ()=>{
   isOpen.value = true;
   nextTick(()=>{
-    const input = document.querySelector('#headlessui-combobox-input-11') as HTMLInputElement;
+    const input = document.querySelector('.input-search-article') as HTMLInputElement;
     input.blur()
   })
 }
