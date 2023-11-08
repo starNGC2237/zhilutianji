@@ -42,6 +42,12 @@ const data:projectItem[] = [
     description:'vue3',
     openMethod:'_blank',
   },
+  {
+    name:'StarLibrary',
+    html_url:'https://starlibrary2.vercel.app/',
+    description:'Responsive Book Website Design Using Vue3 & vue-i18n & Naive UI',
+    openMethod:'_blank',
+  }
 ]
 const openUrl = (item:any)=>{
   if(item.openMethod === '_blank'){
