@@ -566,3 +566,209 @@ bootstrap();
 
 ### 下载文件
 
+先开启静态访问
+
+加入以下方法
+
+```ts
+import {
+  Controller,
+  Get,
+  Post,
+  Res,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
+import { Response } from 'express';
+import { UploadService } from './upload.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { zip } from 'compressing';
+import { join } from 'path';
+  
+
+@Controller('upload')
+export class UploadController {
+  constructor(private readonly uploadService: UploadService) {}
+
+  @Post('album')
+  @UseInterceptors(FileInterceptor('file'))
+  upload(@UploadedFile() file: Express.Multer.File) {
+    console.log(file);
+    return '？？？？？？';
+  }
+
+  @Get('export')
+  downLoad(@Res() res: Response) {
+    res.download(join(__dirname, '../images/1.jpg'));
+  }
+  
+  @Get('stream')
+  async down(@Res() res: Response) {
+    const url = join(__dirname, '../images/1.jpg');
+    // 新建一个zip
+    const stream = new zip.Stream();
+    // 把文件加进去
+    await stream.addEntry(url);
+    // 设置一大堆有用的东西（header）
+    res.setHeader('Content-Type', 'application/octet-stream');
+    res.setHeader('Content-Disposition', 'attachment; filename=export.zip');
+    stream.pipe(res);
+  }
+}
+```
+
+
+## Rxjs 相关
+
+RxJS is a library for composing asynchronous and event-based programs by using observable sequences.
+
+安装
+
+```bsah
+pnpm i rxjs
+```
+
+使用
+
+```ts
+import { of, interval, take, Observable, fromEvent } from "rxjs";
+import { map, filter, scan } from "rxjs/operators";
+  
+
+const observable = new Observable((subscriber) => {
+    subscriber.next(1);
+    subscriber.next(2);
+    subscriber.next(3);
+    setTimeout(() => {
+        subscriber.next(4);
+        subscriber.complete();
+    }, 3000);
+});
+
+observable.subscribe({
+    next: (x) => console.log(x),
+    error: (err) => console.log(err),
+    complete: () => console.log("done"),
+});
+
+  
+
+// interval(500) 输出 0 1 2 3 4 5 6 7 8 9 10 ... 500
+const subs = interval(500)
+    .pipe(
+        map((v) => ({ num: v })),
+        filter((v) => v.num % 2 === 0)
+    )
+    .subscribe((e) => {
+        console.log(e);
+        if (e.num === 10) {
+            subs.unsubscribe();
+        }
+    });
+
+// of(5) 自定义数据
+const source = of(1, 2, 3, 4, 5);
+// retry(2) 重试2次
+// formEvent(document, 'click') 事件监听
+const click$ = fromEvent(document, "click").pipe(map((e) => e.target));
+click$.subscribe((e) => console.log(e));
+// take(3) 只取前3个
+```
+
+
+## 响应拦截器
+
+在 src 下新建 common 文件夹，新建 response.ts
+
+```ts
+import { CallHandler, Injectable, NestInterceptor } from '@nestjs/common';
+import { Observable, map } from 'rxjs';
+  
+interface Data<T> {
+  data: T;
+}
+
+@Injectable()
+export class Response<T> implements NestInterceptor {
+  intercept(context, next: CallHandler): Observable<Data<T>> {
+    return next.handle().pipe(
+      map((data) => {
+        return {
+          status: 0,
+          data,
+          message: '牛逼',
+          success: true,
+        };
+      }),
+    );
+  }
+}
+```
+
+在 main.ts 中引入，使用
+
+```ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { Response } from './common/response';
+  
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalInterceptors(new Response());
+  await app.listen(3000);
+}
+
+bootstrap();
+```
+
+
+
+## 异常拦截器
+
+在 src 下新建common 文件夹，新建filter.ts
+
+```ts
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException,
+} from '@nestjs/common';
+
+  
+
+@Catch()
+export class HttpFilter implements ExceptionFilter {
+  catch(exception: HttpException, host: ArgumentsHost) {
+    const ctx = host.switchToHttp();
+    const request = ctx.getRequest();
+    const response = ctx.getResponse();
+    const status = exception.getStatus();
+    response.status(status).json({
+      status,
+      data: exception.message,
+      time: new Date(),
+      success: false,
+      path: request.url,
+    });
+  }
+}
+```
+
+在 main.ts 中使用
+
+```ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { HttpFilter } from './common/filter';
+  
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalFilters(new HttpFilter());
+  await app.listen(3000);
+}
+
+bootstrap();
+```
