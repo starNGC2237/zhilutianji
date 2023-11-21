@@ -137,4 +137,16 @@ const scrollTop = () => {
   });
 };
 </script>
-<style scoped lang="postcss"></style>
+<style scoped lang="postcss">
+@media print {
+  .scrollToTop {
+    @apply hidden;
+  }
+  main {
+    @apply px-0;
+  }
+  body {
+    border: 1px solid #999;
+  }
+}
+</style>

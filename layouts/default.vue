@@ -121,4 +121,9 @@
 .link-class {
   @apply h-full flex flex-col justify-center items-center transition-all dark:text-[#e8e6e3];
 }
+@media print {
+  .tabs {
+    @apply hidden;
+  }
+}
 </style>
