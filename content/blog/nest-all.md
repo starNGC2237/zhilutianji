@@ -772,3 +772,67 @@ async function bootstrap() {
 
 bootstrap();
 ```
+
+
+## 管道
+
+### 管道转换
+
+可以用来检查参数的 type
+
+在 p,controller.ts 中
+
+```ts
+import {
+  Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
+} from '@nestjs/common';
+import { PService } from './p.service';
+
+@Controller('p')
+export class PController {
+  constructor(private readonly pService: PService) {}
+  
+  @Get(':id')
+  findOne(@Param('id', ParseUUIDPipe) id: string) {
+    // ParseIntPipe
+    // 这样就变成了number类型
+    // ParseUUIDPipe
+    // 使用
+    // import * as uuid from 'uuid';
+    // console.log(uuid.v4());
+    // 管道转换
+    // ValidationPipe
+    // ParseIntPipe
+    // ParseFloatPipe
+    // ParseBoolPipe
+    // ParseArrayPipe
+    // ParseUUIDPipe
+    // ParseEnumPipe
+    // DefaultValuePipe
+    /**
+     * {
+          "message": "Validation failed (uuid is expected)",
+          "error": "Bad Request",
+          "statusCode": 400
+        }
+     */
+    console.log(typeof id);
+    return this.pService.findOne(+id);
+  }
+}
+```
+
+### 管道验证 DTO
+
+
+***TODO***
+
+
+
+
+
+
+
