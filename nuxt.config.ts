@@ -24,7 +24,7 @@ export default defineNuxtConfig({
             "zhilutianji, zhilutianji's site, zhilutianji's about, zhilutianji's homepage,zhilutianji's github ",
         },
         { name: "google", content: "notranslate" },
-        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:card", content: "summary" },
         { name: "twitter:site", content: "@starMars_all" },
         { name: "twitter:creator", content: "@starMars_all" },
         { name: "twitter:title", content: "zhilutianji 's site" },
