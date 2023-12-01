@@ -827,12 +827,201 @@ export class PController {
 
 ### 管道验证 DTO
 
+使用``` nest g pi login ``` 生成 login 文件夹，其中包括 login.pipe.ts
 
-***TODO***
+使用 CreateLoginDTO
+
+```ts
+import { IsNotEmpty, IsString, Length, IsNumber } from 'class-validator';
+export class CreateLoginDto {
+  @IsNotEmpty()
+  @IsString()
+  @Length(4, 20, { message: '用户名长度不对' })
+  name: string;
+  @IsNumber()
+  age: number;
+}
+```
+
+```ts
+import {
+  ArgumentMetadata,
+  HttpException,
+  HttpStatus,
+  Injectable,
+  PipeTransform,
+} from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
+import { validate } from 'class-validator';
+  
+
+@Injectable()
+export class LoginPipe implements PipeTransform {
+  async transform(value: any, metadata: ArgumentMetadata) {
+    // LoginPipe { name: '1111', age: 12 } { metatype: [class CreateLoginDto], type: 'body', data: undefined }
+    // console.log('LoginPipe', value, metadata);
+    // 实例化 CreateLoginDTO
+    const DTO = plainToInstance(metadata.metatype, value);
+    // 验证
+    const errors = await validate(DTO);
+    console.log('errors', errors);
+    if (errors.length) {
+      throw new HttpException(errors, HttpStatus.BAD_REQUEST);
+    }
+    console.log('DTO', DTO);
+    return value;
+  }
+}
+```
 
 
+其实更推荐以下的全局验证管道
+
+在 login.controller.ts 中
+```ts
+import {
+  Controller,
+  Post,
+  Body,
+} from '@nestjs/common';
+import { LoginService } from './login.service';
+import { CreateLoginDto } from './dto/create-login.dto';
+// import { LoginPipe } from './login/login.pipe';
+
+  
+
+@Controller('login')
+export class LoginController {
+  constructor(private readonly loginService: LoginService) {}
+
+  /**
+   * @Post()
+  create(@Body(LoginPipe) createLoginDto: CreateLoginDto) {
+    return this.loginService.create(createLoginDto);
+  }
+   */
+
+  @Post()
+  create(@Body() createLoginDto: CreateLoginDto) {
+    return this.loginService.create(createLoginDto);
+  }
+
+}
+```
+
+直接在 main.ts 中使用
+
+```ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { HttpFilter } from './common/filter';
+import { ValidationPipe } from '@nestjs/common';
+  
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalFilters(new HttpFilter());
+  // 全局验证管道
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(3000);
+
+}
+
+bootstrap();
+```
+
+## 爬虫
+
+写不了一点，网站被爬死了
+
+## 守卫
+
+使用``` nest g res guard ```创建模块
+使用``` nest g gu role ``` 创建守卫
+
+### 部分守卫
+在 guard.controller.ts 中使用
+```ts
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  SetMetadata,
+} from '@nestjs/common';
+import { GuardService } from './guard.service';
+import { CreateGuardDto } from './dto/create-guard.dto';
+import { UpdateGuardDto } from './dto/update-guard.dto';
+import { RoleGuard } from './role/role.guard';
+
+  
+
+@Controller('guard')
+// 添加
+@UseGuards(RoleGuard)
+export class GuardController {
+  constructor(private readonly guardService: GuardService) {}
+
+  @Get()
+  // 设置啥可以用这个接口
+  @SetMetadata('role', ['admin'])
+  findAll() {
+    return this.guardService.findAll();
+  }
+
+}
+```
 
 
+### 全局守卫
+
+在 main.js 中使用
+
+```ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { RoleGuard } from './guard/role/role.guard';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  // 全局守卫
+  app.useGlobalGuards(new RoleGuard());
+  await app.listen(3000);
+}
+
+bootstrap();
+```
 
 
+### 修改守卫读取
 
+在 role.guard.ts 中
+
+```ts
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { Observable } from 'rxjs';
+import { Reflector } from '@nestjs/core';
+import type { Request } from 'express';
+
+@Injectable()
+export class RoleGuard implements CanActivate {
+  constructor(private readonly reflector: Reflector) {}
+  canActivate(
+    context: ExecutionContext,
+  ): boolean | Promise<boolean> | Observable<boolean> {
+    // 获取路由处理器上的元数据
+    const roles = this.reflector.get<string[]>('role', context.getHandler());
+    const req = context.switchToHttp().getRequest<Request>();
+    console.log(req.query.role);
+    if (roles.includes(req.query.role as string)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+```
