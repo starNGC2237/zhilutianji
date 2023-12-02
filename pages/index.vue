@@ -6,27 +6,31 @@
       <section
         class="w-[55%] h-full flex flex-col justify-center box-border text-4xl"
       >
-        <h1 class="text-5xl my-7 font-bold dark:text-[#e8e6e3]">💖 Hello.</h1>
+        <h1 class="text-5xl my-7 font-bold dark:text-[#e8e6e3]">
+          💖 {{ $t("hello") }}{{ $t("doneSign") }}
+        </h1>
         <h2 class="text-3xl my-6 font-bold dark:text-[#e8e6e3]">
-          I am zhilutianji , a Front-end developer.
+          {{ $t("introductionMyself") }}
         </h2>
         <p class="text-xl my-5 dark:text-[#e8e6e3]">
-          You can find me in Github:
+          {{ $t("findMeInGithub") }}
           <a
             target="_blank"
             class="text-[#0000CD] dark:text-blue-500 underline hover:underline"
             href="https://github.com/starNGC2237"
-            >@starNGC2237</a
           >
+            @starNGC2237
+          </a>
         </p>
         <p class="text-xl my-5 dark:text-[#e8e6e3]">
-          and sometimes I also solve problems on
+          {{ $t("findMeInLeetCode") }}
           <a
             target="_blank"
             class="text-[#0000CD] dark:text-blue-500 underline hover:underline"
             href="https://leetcode.cn/u/zhilutianji/"
-            >LeetCode</a
           >
+            LeetCode
+          </a>
         </p>
       </section>
       <section class="w-[45%] h-full flex items-center justify-end box-border">

@@ -57,6 +57,14 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxt/ui",
     "@nuxtjs/eslint-module",
+    [
+      "@nuxtjs/i18n",
+      {
+        vueI18n: "./i18n.config.ts", // if you are using custom path, default
+        locales: ["en", "zh"], // used in URL path prefix
+        defaultLocale: "en",
+      },
+    ],
   ],
   content: {
     highlight: {

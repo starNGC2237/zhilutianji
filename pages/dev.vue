@@ -70,7 +70,7 @@ const openUrl = (item: any) => {
         <h1
           class="px-4 text-4xl mb-7 w-[100%] sm:w-[90%] m-auto dark:text-[#e8e6e3]"
         >
-          项目预览:
+          Projects:
         </h1>
         <div
           class="flex w-full flex-wrap justify-between px-4 sm:w-[90%] m-auto"
