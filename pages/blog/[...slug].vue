@@ -29,18 +29,16 @@
       />
     </div>
     <UModal v-model="isOpen">
-      <UModal v-model="isOpen">
-        <UCommandPalette
-          :autoselect="false"
-          :groups="groupLinks"
-          :ui="{
-            input: {
-              base: 'w-full placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0 focus:outline-none input-search-article',
-            },
-          }"
-          @update:model-value="onSelect"
-        />
-      </UModal>
+      <UCommandPalette
+        :autoselect="false"
+        :groups="groupLinks"
+        :ui="{
+          input: {
+            base: 'w-full placeholder-gray-400 dark:placeholder-gray-500 bg-transparent border-0 text-gray-900 dark:text-white focus:ring-0 focus:outline-none input-search-article',
+          },
+        }"
+        @update:model-value="onSelect"
+      />
     </UModal>
   </main>
 </template>
