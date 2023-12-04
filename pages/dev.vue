@@ -85,8 +85,9 @@ const openUrl = (item: any) => {
                 :href="item['html_url']"
                 class="font-bold"
                 @click.prevent="openUrl(item)"
-                >{{ item["name"] }}</a
               >
+                {{ item["name"] }}
+              </a>
             </h2>
             <p>
               {{

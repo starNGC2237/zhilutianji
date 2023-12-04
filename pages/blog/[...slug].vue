@@ -11,7 +11,7 @@
       class="scrollToTop fixed md:bottom-5 md:right-[8%] bottom-[7rem] right-[5px] h-20 justify-center items-center flex flex-col gap-1"
     >
       <UButton
-        icon="i-heroicons-square-3-stack-3d"
+        icon="i-heroicons-sparkles"
         size="xl"
         color="primary"
         rounded-full
