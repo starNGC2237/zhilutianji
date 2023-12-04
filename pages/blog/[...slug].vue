@@ -2,8 +2,10 @@
   <main
     class="absolute w-full h-fit min-h-full flex bg-[#fff] pb-[8em] px-[10%] dark:bg-neutral-900"
   >
-    <section class="container h-fit sm:px-[4em] box-border pt-[4em]">
-      <ContentDoc class="prose max-w-none dark:prose-invert text-lg" />
+    <section class="container h-fit sm:px-[4em] box-border pt-[8em]">
+      <ContentDoc
+        class="prose max-w-[100ch] dark:prose-invert text-lg mx-auto"
+      />
     </section>
     <div
       class="scrollToTop fixed md:bottom-5 md:right-[8%] bottom-[7rem] right-[5px] h-20 justify-center items-center flex flex-col gap-1"
