@@ -56,3 +56,69 @@
 
 === 的情况 就不说了
 
+## 第二章 ECMAScript 和 TypeScript 概述
+
+### es5+的功能：let、const
+
+我们应该使用 let 替代 var
+
+当遇到对象时，只读的 const 允许我们修改或重新赋值对象的属性，但变量本身的引用不可以更改，也结束帮你对这个变量重新赋值
+
+当变量的引用不会被改变时，我们应该使用 const
+
+### es5+的功能：模板字符串、箭头函数、参数默认值、声明展开和剩余参数
+
+这个不必多说，注意的是，模板字符串可以换行，不用写\n
+
+### es5+的功能：增强的对象属性
+
+```
+let [x,y] = ['a','b']
+```
+
+***数组解析也可以用来进行值的互换，而不需要创建临时变量，例如：***
+
+```
+[x,y] = [y,x]
+```
+
+对于排序算法很有用
+
+还有一个简写方法名
+
+```
+var hello = {
+	nam: 'abcdef',
+	printHello: function printHello(){
+		console.log('Hello')
+	}
+}
+console.log(hello.printHello())
+```
+
+### es5+的功能：一种声明类的语法糖
+
+```
+class Book {
+	constructor(title){
+		this.title = title
+	}
+	printTitle(){
+		console.log(this.title)
+	}
+}
+```
+
+类的继承
+
+```
+class ITBook extends Book(){
+	constructor(title,pages){
+		super(title)
+		this.pages = pages
+	}
+}
+let jsBook = new ITBook('js','99')
+jsBook.printTitle()
+```
+
