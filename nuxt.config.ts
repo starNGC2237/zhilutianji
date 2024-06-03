@@ -63,6 +63,7 @@ export default defineNuxtConfig({
         vueI18n: "./i18n.config.ts", // if you are using custom path, default
         locales: ["en", "zh"], // used in URL path prefix
         defaultLocale: "en",
+        detectBrowserLanguage: false,
       },
     ],
   ],
