@@ -122,3 +122,31 @@ let jsBook = new ITBook('js','99')
 jsBook.printTitle()
 ```
 
+## 第三章 数组
+
+可以使用console.table使得控制台打印表格
+
+在[1,2,5]的位置1处插入[3,4]可以使用splice(1,0,3,4)
+
+去重的一种方法：Array.from(new Set(arr))
+
+复制数组：Array.of(...arr)
+
+创建默认值0的6个大小的数组：Array(6).fill(0)
+
+copyWithin(1,3,5)，把3开始5结束的复制到1位置
+
+
+通过 localeCompare 方法按照字母表排序
+
+如果使用 .sort() 方法排序，是按照 ASCII 表排序的，即A<J<a<j
+
+可以使用 .sort((a,b)=>a.localeCompare(b)) 排序，这样就是 a>A>j>J 了
+
+js有类型数组，let arr = new TypedArray(length)，将TypedArray替换成需要的。使用 WEBGL API、进行位操作、处理文件和图像时，非常好用
+
+可以使用localeCompare把小写字母排前面
+
+也可以用来排重音符号
+
+js有类型数组，let arr = new TypedArray(length)，将TypedArray替换成需要的
