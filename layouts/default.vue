@@ -1,5 +1,6 @@
 <template>
   <div class="bg-[#fff] dark:bg-neutral-900">
+    <SpeedInsights />
     <slot />
     <div class="tabs">
       <ul class="tabs-ul">
@@ -107,6 +108,9 @@
     </div>
   </div>
 </template>
+<script setup lang="ts">
+import { SpeedInsights } from "@vercel/speed-insights/nuxt";
+</script>
 <style scoped lang="postcss">
 .tabs {
   @apply fixed bottom-0 left-0 right-0 shadow-sm bg-white border rounded-none bg-opacity-70 backdrop-blur-sm z-50 dark:bg-neutral-900;
