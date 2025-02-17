@@ -39,7 +39,7 @@
           class="rounded-full 2xl:w-[300px] xl:w-[40%] lg:w-[55%] md:w-[65%] sm:w-[80%] w-[80%] h-auto"
           width="80%"
           height="auto"
-          src="/head.jpg"
+          src="/head.png"
           alt="head pic"
           title="What's new?"
           @click="$router.push('/dev')"

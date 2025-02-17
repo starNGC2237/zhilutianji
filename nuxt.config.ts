@@ -34,14 +34,14 @@ export default defineNuxtConfig({
         },
         {
           name: "twitter:image",
-          content: "https://zhilutianji.vercel.app/head.jpg",
+          content: "https://zhilutianji.vercel.app/head.png",
         },
         { property: "og:title", content: "zhilutianji 's site" },
         { property: "og:type", content: "website" },
         { property: "og:url", content: "https://zhilutianji.vercel.app" },
         {
           property: "og:image",
-          content: "https://zhilutianji.vercel.app/head.jpg",
+          content: "https://zhilutianji.vercel.app/head.png",
         },
         {
           property: "og:description",
